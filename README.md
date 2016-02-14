@@ -159,7 +159,7 @@ Returns(Some of these are the actual values - others are "specifications"):
         "custom-property-list": { "custom-property": [] },
         "event-price-info-list": { "event-price-info": [] },
         "resource-type-list": { "resource-type": "Object" }
-    }, ...]
+    } ]
 } }
 ```
 
