@@ -1,6 +1,6 @@
 {
   "name": "flexbillet-api",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Javascript bindings for \"Organizer Services API\" of FlexBillet",
   "main": "index.js",
   "directories": { "test": "test" },
@@ -8,11 +8,15 @@
     "test": "./node_modules/mocha/bin/mocha --recursive test"
   },
   "repositories": {
-      "type": "git",
-      "url" : "https://github.com/nwillems/flexbillet-api"
+    "type": "git",
+    "url": "https://github.com/nwillems/node-flexbillet-api.git"
   },
+  "bugs": {
+    "url": "https://github.com/nwillems/node-flexbillet-api/issues"
+  },
+  "homepage": "https://github.com/nwillems/node-flexbillet-api",
   "author": "Nicolai Willems<niwil90@gmail.com>",
-  "license": "MIT",
+  "license": "ISC",
   "devDependencies": {
     "expect.js": "^0.3.1",
     "mocha": "^2.4.5"
