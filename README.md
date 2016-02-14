@@ -117,7 +117,7 @@ Where eventkey and secret is obtained from event-list.
 
 Returns:
 ```JSON
-{ 'event-details': "[EventObject]" }
+{ "event-details": "[EventObject]" }
 ```
 
 ## Generally Defined Objects
