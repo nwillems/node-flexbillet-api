@@ -32,14 +32,13 @@ var flex = require("flexbillet-api")(config);
 flex.eventlist(function(err, res){
     if(err) return done(err);
 
-    console.log(res['event-list']);
+    console.log(res["event-list"]);
 });
 ```
 
 ## Methods
 
 ### hello
-VM703:2 External member system
 ...
 
 ### Basic Details
@@ -47,7 +46,7 @@ VM703:2 External member system
 
 Returns
 ```JSON
-{ 'basic-details': { 
+{ "basic-details": { 
    "site-skin-url": "string",
    "environment-appspot-host": "string"
 } }
@@ -59,28 +58,28 @@ Returns
 
 Returns:
 ```JSON
-{ 'organizer-details': { 
-    'organizer-key': 'String',
-    'organizer-name': 'String',
-    'locale-key': 'da',
-    'organizer-email': 'String-Email',
-    'organizer-phone': '',
-    'organizer-web': '',
-    'front-page-content': 'String-HTML',
-    'header-text': '',
-    'header-text-color': '#000000',
-    'header-text-size': '20',
-    'header-text-weight-style': 'NORMAL',
-    'header-text-x-offset': '0',
-    'header-text-y-offset': '0',
-    'header-text-alignment': 'LEFT',
-    'site-skin-url': 'Url',
-    'primary-site': 't',
-    'site-layout': 'Boxed',
-    'member-system': 'false',
-    'social-image-url': '',
-    'meta-description': '',
-    'robots-behavior': 'NotAllowed'
+{ "organizer-details": { 
+    "organizer-key": "String",
+    "organizer-name": "String",
+    "locale-key": "da",
+    "organizer-email": "String-Email",
+    "organizer-phone": "",
+    "organizer-web": "",
+    "front-page-content": "String-HTML",
+    "header-text": "",
+    "header-text-color": "#000000",
+    "header-text-size": "20",
+    "header-text-weight-style": "NORMAL",
+    "header-text-x-offset": "0",
+    "header-text-y-offset": "0",
+    "header-text-alignment": "LEFT",
+    "site-skin-url": "Url",
+    "primary-site": "t",
+    "site-layout": "Boxed",
+    "member-system": "false",
+    "social-image-url": "",
+    "meta-description": "",
+    "robots-behavior": "NotAllowed"
 } }
 ```
 
