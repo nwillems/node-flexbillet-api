@@ -149,7 +149,7 @@ Returns(Some of these are the actual values - others are "specifications"):
             "zipcode": "",
             "city": "",
             "country": "" },
-        account: {
+        "account": {
             "minimum-price-to-pay": 0,
             "fixed-price": false,
             "currency-code": "",
@@ -158,7 +158,7 @@ Returns(Some of these are the actual values - others are "specifications"):
         "participant-designation-list": { "participant-designation": "Object" },
         "custom-property-list": { "custom-property": [] },
         "event-price-info-list": { "event-price-info": [] },
-        "resource-type-list": { "resource-type": Object }
+        "resource-type-list": { "resource-type": "Object" }
     }, ...]
 } }
 ```
