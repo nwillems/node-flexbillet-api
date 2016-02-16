@@ -36,6 +36,17 @@ flex.eventlist(function(err, res){
 });
 ```
 
+## TODO
+
+* Remaining methods for the API to be functional
+* Work with the Organizerservices API for event creations(not part of the usual
+  API)
+* Hook up with CI(Eg Travis CI)
+
+## Running the tests
+
+Since mocking is implemented, you can just run `npm test`
+
 ## Methods
 
 ### hello
@@ -111,7 +122,7 @@ Returns():
 ```
 
 ### Event Details
-`flex.eventdetails({"eventkey": "", "secret": ""}, cb)`
+`flex.eventdetails(eventkey, eventsecret, cb)`
 
 Where eventkey and secret is obtained from event-list.
 
@@ -181,11 +192,7 @@ Event-object(Some of these are the actual values - others are "specifications"):
 ```
 
 
-### TODO
-* Department list for Organizer
-* RoleType List for Organizer
-* Staff List for Organizer/Department
-* Staff List for Organizer
+### Methods TODO
 * Ticket List for Event
 * Scanned Tickets for Event
 * Event Tab List
@@ -201,3 +208,5 @@ Event-object(Some of these are the actual values - others are "specifications"):
 * Membersystem data
 * Create team-member
 
+### Method testing TODO
+* Some to come

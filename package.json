@@ -9,7 +9,7 @@
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha --recursive test"
   },
-  "repositories": {
+  "repository": {
     "type": "git",
     "url": "https://github.com/nwillems/node-flexbillet-api.git"
   },
@@ -21,6 +21,7 @@
   "license": "ISC",
   "devDependencies": {
     "expect.js": "^0.3.1",
-    "mocha": "^2.4.5"
+    "mocha": "^2.4.5",
+    "nock": "^7.2.1"
   }
 }
