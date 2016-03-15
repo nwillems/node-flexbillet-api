@@ -1,6 +1,6 @@
 {
   "name": "flexbillet-api",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Javascript bindings for \"Organizer Services API\" of FlexBillet",
   "main": "index.js",
   "directories": {
