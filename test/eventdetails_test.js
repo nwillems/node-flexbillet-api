@@ -1,21 +1,31 @@
-var assert = require('assert');
-var expect = require('expect.js');
+var assert = require('assert')
+  , expect = require('expect.js')
+  , nock = require('nock');
 
 var config = require('./fixture.json'); 
 
 describe("Event details endpoints", function(){
     it("should respond with event details", function(done){
+        var scope = nock("https://flexbillet.dk")
+            .get("/organizerservices/api/v1/eventdetails")
+            .query({ 
+                format: 'json', 
+                localekey: 'en',
+                passphrase: config.passphrase,
+                organizerkey: config.organizerKey,
+                secret: 'eventsecret',
+                eventkey: '12345678'
+            }).reply(200, { "event-details": {} });
+
         var flex = require("../")(config);
 
-        var eventkey = "17514552291073775c992331aed42afb080a97dddea347a8";
-        flex.eventdetails({'eventkey': eventkey, 'secret': ''}, 
-            function(err, res){
-                if(err) return done(err);
+        var eventkey = "12345678";
+        flex.eventdetails(eventkey, 'eventsecret', function(err, res){
+            if(err) return done(err);
 
-                expect(res).to.have.property("event-details");
-                //TODO: Fix more asserts
-                done();
-            }
-        );
+            expect(res).to.have.property("event-details");
+            //TODO: Fix more asserts
+            done();
+        });
     });
 });

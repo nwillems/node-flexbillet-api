@@ -13,14 +13,17 @@ function request(options, callback){
             });
             res.on('end', function(){
                 var result = JSON.parse(data); 
-                callback(null, result);
+                callback(undefined, result);
             });
         }else{
-            callback({ statusCode: statusCode, error: res }, null);
+            callback(
+                new Error("Request failed with: " + statusCode),
+                undefined
+            );
         }
     });
     req.on('error', function(err){
-        callback(err);
+        callback(err, undefined);
     })
     req.end();
     return req;
@@ -88,7 +91,7 @@ FlexAPI.prototype.hello = function(cb){
  */
 FlexAPI.prototype.basics= function(cb){
     var apiPath = constructURL(this.config, "/basics");
-    
+
     var options = extend(this.defaultRequest, { path: apiPath });
     var req = request(options, function(err, res){
         if(err){ return cb(err); }
@@ -120,6 +123,103 @@ FlexAPI.prototype.organizerdetails = function(cb){
     return req;
 }
 
+/**
+ * Get a list of departments
+ *
+ * Args:
+ *  cb - Callback of (err, res)
+ */
+FlexAPI.prototype.departmentlist = function(cb){
+    var apiPath = constructURL(this.config, '/departmentlist');
+
+    var options = extend(this.defaultRequest, { path: apiPath });
+    var req = request(options, function(err, res){
+        if(err){ return cb(err); }
+
+        cb(null, res);
+    });
+    return req;
+}
+
+/**
+ * Get a list of Role types
+ *
+ * Args:
+ *  cb - Callback of (err, res)
+ */
+FlexAPI.prototype.roletypelist = function(cb){
+    var apiPath = constructURL(this.config, '/roletypelist');
+
+    var options = extend(this.defaultRequest, { path: apiPath });
+    var req = request(options, function(err, res){
+        if(err){ return cb(err); }
+
+        cb(null, res);
+    });
+    return req;
+}
+
+/**
+ * Get a list of staff for organizer/department
+ * Consider renaming to "stafflist"
+ *
+ * Args:
+ *  opts - Options object
+ *  cb - callback of cb,err)
+ *
+ *  Opts-object:
+ *  {
+ *    roletypes: String (roletypekey separated by comma)
+ *  }
+ */
+FlexAPI.prototype.stafflistcontext = function(opts, cb){
+    if(typeof(opts) === 'function') {
+        cb = opts;
+        opts = undefined;
+    }
+
+    var roles = opts || {};
+    var apiPath = constructURL(this.config, '/stafflistcontext', roles);
+
+    var options = extend(this.defaultRequest, { path: apiPath });
+    var req = request(options, function(err, res){
+        if(err){ return cb(err); }
+
+        cb(null, res);
+    });
+    return req;
+}
+
+/**
+ * Get a list of staff for organizer including departments
+ * Consider renaming to "stafflist"
+ *
+ * Args:
+ *  opts - Options object
+ *  cb - callback of cb,err)
+ *
+ *  Opts-object:
+ *  {
+ *    roletypes: String (roletypekey separated by comma)
+ *  }
+ */
+FlexAPI.prototype.stafflistorganizer = function(opts, cb){
+    if(typeof(opts) === 'function') {
+        cb = opts;
+        opts = undefined;
+    }
+
+    var roles = opts || {};
+    var apiPath = constructURL(this.config, '/stafflistorganizer', roles);
+
+    var options = extend(this.defaultRequest, { path: apiPath });
+    var req = request(options, function(err, res){
+        if(err){ return cb(err); }
+
+        cb(null, res);
+    });
+    return req;
+}
 
 /**
  * Get list of events
@@ -137,9 +237,23 @@ FlexAPI.prototype.organizerdetails = function(cb){
  * }
  */
 FlexAPI.prototype.eventlist = function(args, cb){
-    if(!cb && typeof(args) == 'function') cb = args;
+    if(!cb && typeof(args) == 'function'){
+        cb = args;
+        args = {};
+    }
 
-    var apiPath = constructURL(this.config, "/eventlist");
+    var urlArgs = {}
+    var params = [
+        'include-private-events', 
+        'include-test-events',
+        'changedsincedatetime',
+        'include-for-departments' ];
+    params.forEach(function(elm){
+        if(args[elm])
+            realArgs[elm] = args[elm];
+    });
+
+    var apiPath = constructURL(this.config, "/eventlist", urlArgs);
     
     var options = extend(this.defaultRequest, { path: apiPath });
     var req = request(options, function(err, res){
@@ -154,22 +268,16 @@ FlexAPI.prototype.eventlist = function(args, cb){
  * Get details for a given event
  *
  * Args:
- *  opts - object holding eventkey and secret
+ *  eventkey - event identifier
+ *  eventsecret - Secret for event
  *  args - Argument object, details below.
  *  cb - Callback of (err,res)
  *
- * Args-object:
- * {
- *  include-private-events : boolean,
- *  include-test-events : boolean, 
- *  changedsincedatetime : milliseconds,
- *  include-for-departments : boolean
- * }
  */
-FlexAPI.prototype.eventdetails = function(opts, cb){
+FlexAPI.prototype.eventdetails = function(eventkey, eventsecret, cb){
     var apiPath = constructURL(this.config, "/eventdetails", 
-            {'eventkey': opts.eventkey, 'secret': opts.secret });
-    
+            {'eventkey': eventkey, 'secret': eventsecret });
+   
     var options = extend(this.defaultRequest, { path: apiPath });
     var req = request(options, function(err, res){
         if(err){ return cb(err); }
