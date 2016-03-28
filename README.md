@@ -6,6 +6,8 @@ Install:
 $ npm install flexbillet-api
 ```
 
+Documentation at https://flexbillet.dk/organizerservices/ and PDF provided for event-creation.
+
 ## Usage
 
 Basic testing connectivity to the API
